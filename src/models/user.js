@@ -12,6 +12,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  permits: {
+    type: String,
+    default: "user",
+  },
   lastname: {
     type: String,
     required: true,
@@ -75,7 +79,7 @@ userSchema.set("toJSON", {
     (returnObject.id = returnObject._id),
       delete returnObject._id,
       delete returnObject.__v;
-      delete returnObject.password;
+    delete returnObject.password;
   },
 });
 userSchema.plugin(mongoosePaginate);
