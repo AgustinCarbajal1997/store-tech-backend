@@ -1,4 +1,4 @@
-const orders = require("../constants/orders");
+const orders = require("../utils/constants/orders");
 const Factory = require("../dao/factory");
 const getAll = async (page, limit, pagination, orderField, orderBy) => {
   try {
