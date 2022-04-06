@@ -1,3 +1,4 @@
+const createError = require("../utils/functions/createError");
 class ContainerDao {
   constructor(model) {
     this.model = model;
@@ -11,10 +12,7 @@ class ContainerDao {
         data,
       };
     } catch (error) {
-      throw {
-        status: 500,
-        message: `Something have gone wrong. Unsuccessful action. ${error.message}`,
-      };
+      throw createError(500, error.message);
     }
   }
   async getById(id) {
@@ -26,10 +24,7 @@ class ContainerDao {
         data,
       };
     } catch (error) {
-      throw {
-        status: 500,
-        message: `Something have gone wrong. Unsuccessful action. ${error.message}`,
-      };
+      throw createError(500, error.message);
     }
   }
   async getOne(query) {
@@ -37,7 +32,7 @@ class ContainerDao {
       const data = await this.model.findOne(query);
       return data;
     } catch (error) {
-      throw { status: 500, message: "Ha ocurrido un error" };
+      throw createError(500, error.message);
     }
   }
   async getByQuery(query, options) {
@@ -49,8 +44,7 @@ class ContainerDao {
         data,
       };
     } catch (error) {
-      console.log(error)
-      throw { status: 500, message: "Ha ocurrido un error" };
+      throw createError(500, error.message);
     }
   }
 
@@ -64,7 +58,7 @@ class ContainerDao {
         data,
       };
     } catch (error) {
-      throw { status: 500, message: "Ha ocurrido un error" };
+      throw createError(500, error.message);
     }
   }
 
@@ -77,7 +71,7 @@ class ContainerDao {
         data,
       };
     } catch (error) {
-      throw { status: 500, message: "Ha ocurrido un error" };
+      throw createError(500, error.message);
     }
   }
 }

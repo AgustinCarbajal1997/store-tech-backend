@@ -10,7 +10,7 @@ const paymentService = async (cartArr) => {
           back_urls: {
             failure: "/failure",
             pending: "/pending",
-            success: "http://localhost:3000/",
+            success: "http://localhost:3001/",
           },
         };
         const payment = await axios.post(url, body, {

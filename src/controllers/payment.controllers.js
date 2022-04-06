@@ -1,5 +1,5 @@
 const paymentServices = require("../services/payment.services");
-
+const errorHandle = require("../utils/functions/errorHandle");
 const paymentController = async (req, res) => {
   const cartArr = req.cartArr;
   const updateUser = req.updateUser;
@@ -15,8 +15,7 @@ const paymentController = async (req, res) => {
     const data = await paymentServices(generateCartMp);
     res.status(200).json({ dataUser: updateUser, dataPayment: data });
   } catch (error) {
-    console.log(error);
-    res.status(404).json({ error: error.message });
+    errorHandle(res, error);
   }
 };
 

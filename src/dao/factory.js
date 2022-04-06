@@ -1,6 +1,7 @@
 const { productDao, userDao, purchaseDao } = require("./subClassesDAO");
 const mongoose = require("mongoose");
 const config = require("../config/config");
+const { loggerConsole, loggerError } = require("../utils/loggers/settingsLogger");
 class Factory {
   constructor() {
     this.connectDB();
@@ -13,9 +14,9 @@ class Factory {
   async connectDB() {
     try {
       await mongoose.connect(config.mongoDb.connectionStr);
-      console.log("Base de datos");
+      loggerConsole.info("Successful database connection");
     } catch (error) {
-      console.log("Ha ocurrido un error", error);
+      loggerError.error("Ha ocurrido un error", error);
     }
   }
 }

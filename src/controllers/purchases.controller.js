@@ -1,4 +1,5 @@
 const purchase = require("../services/purchases.services");
+const errorHandle = require("../utils/functions/errorHandle");
 const getPurchases = async (req, res) => {
   const { id: userId } = req.user;
   const { page, limit, pagination } = req.query;
@@ -6,7 +7,7 @@ const getPurchases = async (req, res) => {
     const data = await purchase.getPurchases(userId, page, limit, pagination);
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 const confirmPurchase = async (req, res, next) => {
@@ -28,8 +29,7 @@ const confirmPurchase = async (req, res, next) => {
     req.cartArr = data.cartArr;
     next()
   } catch (error) {
-    console.log(error);
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 module.exports = {

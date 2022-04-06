@@ -3,6 +3,7 @@ require("dotenv").config();
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 module.exports = {
+  port:process.env.PORT || 3000,
   mongoDb: {
     connectionStr: process.env.MONGO_CONNECTION,
   },

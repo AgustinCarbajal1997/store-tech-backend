@@ -1,4 +1,5 @@
 const cart = require("../services/cart.services");
+const errorHandle = require("../utils/functions/errorHandle");
 const postProductCart = async (req, res) => {
   const { productId, title, image, unites, price, quantity } = req.body;
   const { id: userId } = req.user;
@@ -14,7 +15,7 @@ const postProductCart = async (req, res) => {
     return res.status(data.status).json(data);
   } catch (error) {
     console.log(error)
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 const deleteProductCart = async (req, res) => {
@@ -24,7 +25,7 @@ const deleteProductCart = async (req, res) => {
     const data = await cart.deleteProductCart(userId, productId);
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 

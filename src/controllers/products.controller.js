@@ -1,4 +1,5 @@
 const products = require("../services/products.services");
+const errorHandle = require("../utils/functions/errorHandle");
 const getAll = async (req, res) => {
   const { page, limit, pagination, orderField, orderBy } = req.query;
   try {
@@ -11,7 +12,7 @@ const getAll = async (req, res) => {
     );
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 const getById = async (req, res) => {
@@ -19,7 +20,7 @@ const getById = async (req, res) => {
     const data = await products.getById(req.params.id);
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 
@@ -34,7 +35,7 @@ const getSeveralIds = async (req, res) => {
     );
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 const getByDiscount = async (req, res) => {
@@ -48,7 +49,7 @@ const getByDiscount = async (req, res) => {
     );
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 
@@ -69,7 +70,7 @@ const getByCategory = async (req, res) => {
     return res.status(data.status).json(data);
   } catch (error) {
     console.log(error);
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 const generalSearch = async (req, res) => {
@@ -78,7 +79,7 @@ const generalSearch = async (req, res) => {
     const data = await products.generalSearch(q, page, limit, pagination);
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 const getComparison = async (req, res) => {
@@ -92,7 +93,7 @@ const getComparison = async (req, res) => {
     );
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status || 500).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 
@@ -103,7 +104,7 @@ const setFavorites = async (req, res) => {
     const data = await products.setFavorites(userId, productId);
     return res.status(data.status).json(data);
   } catch (error) {
-    res.status(error.status).json({ message: error.message });
+    errorHandle(res, error);
   }
 };
 
